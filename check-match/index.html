@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Memory</title>
+
+    <!-- external css -->
+    <link 
+        rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" 
+        integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" 
+        crossorigin="anonymous">
+    <link 
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+        rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" 
+        crossorigin="anonymous">
+
+    <!-- app css -->    
+    <link rel="stylesheet" href="memory.css">
+    
+    <!-- external js -->   
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        
+        <section id="board">
+            <div class="container" >
+                <div class="row">
+                    <div class="col-3" v-for="card in cards">
+                        <transition name="flip" mode="out-in">    
+                            <div class="card face-card" v-if="card.show || card.match" :key="card.show">
+                                <h1><i class="fa fa-smile-o"></i></h1>
+                                <div class="card-block">
+                                    <h4 class="card-title">{{ card.name }}</h4>
+                                </div>
+                            </div>
+                        
+                            <div class="card back-card"v-else v-on:click="flipCard(card)" :key="card.show">
+                                <h1><i class="fa fa-user-circle-o"></i></h1>
+                                <div class="card-block">
+                                    <h4 class="card-title">Vue Memory</h4>
+                                </div>
+                            </div>
+                        </transition>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Turns {{ turns }}</h1>
+                    <div class="alert alert-success" v-if="activeCards.length==2">
+                        <h4 class="alert-heading" v-if="pairMatch">We have a match!</h4>
+                        <h4 class="alert-heading" v-else>No match.</h4>
+                        <button class="btn btn-primary" v-on:click="nextTurn">Next Turn</button>
+                    </div>
+                    
+
+            
+                <p>
+                <a href="#" class="btn btn-primary">Main call to action</a>
+                <a href="#" class="btn btn-secondary">Secondary action</a>
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                animals: ['dog', 'cat', 'mouse', 'hamster', 'goldfish', 'hedgehog', 'ferret', 'budgie'],
+                cards: [],
+                activeCards: [],
+                pairMatch: false,
+                turns: 0
+            },
+            methods: {
+                createCards: function() {
+                    var doubledAnimals = this.animals.concat(this.animals);
+                    var shuffledAnimals = _.shuffle(doubledAnimals);
+                    for (var i=0; i< doubledAnimals.length; i++){
+                        this.cards.push({
+                            name: shuffledAnimals.pop(),
+                            show: false,
+                            match: false
+                        });
+                    }
+                },
+                flipCard: function(card) {
+                    if (this.activeCards.length == 2){
+                        return;
+                    }
+                    card.show = true;
+                    this.activeCards.push(card);
+                    if (this.activeCards.length == 2){
+                        if (this.activeCards[0].name == this.activeCards[1].name) {
+                            this.activeCards[0].match = true;
+                            this.activeCards[1].match = true;
+                            this.pairMatch = true;
+                        }
+                    }
+                },
+                nextTurn: function(){
+                    this.pairMatch = false;
+                    for (var i=0; i< this.cards.length; i++){
+                        this.cards[i].show = false;
+                    }
+                    this.turns += 1;
+                    this.activeCards = [];
+                },
+            },
+            mounted: function(){
+                this.createCards();
+            }
+        })
+    </script>
+    
+</body>
+</html>
