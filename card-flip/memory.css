@@ -1,0 +1,68 @@
+.face-card {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.face-card h1 {
+    color: #FFF7C0;
+    background-color: grey;
+    font-size: 6rem;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+}
+.face-card .card-block {
+    margin-top: 0px;
+    padding-top: 20px;
+    background-color: #6EC4DB;
+    color: white;
+}
+.back-card {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.back-card h1 {
+    color: #FA7C92;
+    background-color: grey;
+    font-size: 6rem;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+}
+.back-card .card-block {
+    margin-top: 0px;
+    padding-top: 20px;
+    background-color: #66AB8C;
+    color: white;
+}
+
+.flip-enter {
+/*transform: rotateY(0deg);*/
+}
+
+.flip-enter-active {
+    animation: flip-in  0.5s ease-out forwards;
+}
+
+.flip-leave {
+    /*transform: rotateY(0deg);*/
+}
+
+.flip-leave-active {
+    animation: flip-out 0.5s ease-out forwards;
+}
+
+@keyframes flip-out {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(90deg);
+    }
+}
+
+@keyframes flip-in {
+    from {
+        transform: rotateY(90deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
+}

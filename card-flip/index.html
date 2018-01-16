@@ -16,31 +16,13 @@
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
         rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" 
         crossorigin="anonymous">
+
+    <!-- app css -->    
+    <link rel="stylesheet" href="memory.css">
     
     <!-- external js -->   
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
-
-    <style>
-        .face-card {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .face-card h1 {
-            color: #FFF7C0;
-            background-color: grey;
-            font-size: 6rem;
-            padding-bottom: 20px;
-            margin-bottom: 0px;
-        }
-        .face-card .card-block {
-            margin-top: 0px;
-            padding-top: 20px;
-            background-color: #6EC4DB;
-            color: white;
-        }
-        
-    </style>
 </head>
 <body>
     <div id="app">
@@ -49,13 +31,21 @@
             <hr>
             <div class="row">
                 <div class="col-3" v-for="card in cards">
-                    <div class="card face-card">
-                        <h1><i class="fa fa-lg fa-smile-o"></i></h1>
-                        <div class="card-block">
-                            <h4 class="card-title">{{ card.name }}</h4>
+                    <transition name="flip" mode="out-in">    
+                        <div class="card face-card" v-if="card.show" :key="card.show">
+                            <h1><i class="fa fa-lg fa-smile-o"></i></h1>
+                            <div class="card-block">
+                                <h4 class="card-title">{{ card.name }}</h4>
+                            </div>
                         </div>
-                        
-                    </div>
+                    
+                        <div class="card back-card"v-else v-on:click="flipCard(card)" :key="card.show">
+                            <h1><i class="fa fa-user-circle-o"></i></h1>
+                            <div class="card-block">
+                                <h4 class="card-title">Vue Memory</h4>
+                            </div>
+                        </div>
+                    </transition>
                 </div>
             </div>
         </div>
@@ -75,12 +65,15 @@
                     for (var i=0; i< doubledAnimals.length; i++){
                         this.cards.push({
                             name: shuffledAnimals.pop(),
+                            show: false,
                         });
                     }
+                },
+                flipCard: function(card) {
+                    card.show = true;
                 }
             }
         })
-
     </script>
     
 </body>
