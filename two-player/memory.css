@@ -37,6 +37,24 @@
     color: white;
 }
 
+.player-card li{
+    background-color: #01ABAA;
+}
+
+.player-card h4 {
+    color: #000000;
+    background-color: #FEDC3D;
+}
+
+.info-card h4 {
+    color: #000000;
+    background-color: #FEDC3D;
+}
+
+.info-card p {
+    background-color: #FEA680;
+}
+
 .flip-enter {
 /*transform: rotateY(0deg);*/
 }
