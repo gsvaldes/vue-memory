@@ -38,21 +38,21 @@
 }
 
 .player-card li{
-    background-color: #01ABAA;
+    background-color: #6EC4DB;
 }
 
 .player-card h4 {
     color: #000000;
-    background-color: #FEDC3D;
+    background-color: #FFF7C0;
 }
 
 .info-card h4 {
     color: #000000;
-    background-color: #FEDC3D;
+    background-color: #FFF7C0;
 }
 
 .info-card p {
-    background-color: #FEA680;
+    background-color: #FA7C92;
 }
 
 .flip-enter {

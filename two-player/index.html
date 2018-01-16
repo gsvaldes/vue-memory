@@ -76,8 +76,8 @@
                             <div class="alert alert-success" v-if="activeCards.length==2">
                                 <h4 class="alert-heading" >{{ resultMessage }}</h4>
                                 
-                                <button class="btn btn-primary" v-on:click="newGame" v-show="gameOver">New Game</button>
-                                <button class="btn btn-primary" v-on:click="nextTurn" v-show="!gameOver">Next Turn</button>
+                                <button class="btn btn-outline-secondary" v-on:click="newGame" v-show="gameOver">New Game</button>
+                                <button class="btn btn-outline-secondary" v-on:click="nextTurn" v-show="!gameOver">Next Turn</button>
                             </div>
                         </div>
                     </div>
