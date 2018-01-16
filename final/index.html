@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Vue Memory</title>
 
     <link 
         rel="stylesheet" 
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" 
         integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" 
         crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap@next/dist/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -78,7 +77,7 @@
                 </div>
                 <button class="btn btn-primary" @click="newGame">New Game</button>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Player one name" v-model="players.one.name">
                     <div class="input-group-append">
@@ -91,24 +90,35 @@
                         <button class="btn btn-outline-secondary" type="button">Done</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
          </div> 
         <div>
-        <b-btn v-b-modal.modal1>Launch demo modal</b-btn>
 
         <!-- Modal Component -->
-        <b-modal id="modal1" title="Let's Play Concentration!" v-model="modalShow">
+        <b-modal 
+            id="modal1" 
+            title="Let's Play Concentration!" 
+            :cancel-disabled="true"
+            v-model="modalShow">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Player one name" v-model="players.one.name">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Done</button>
-                </div>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Player one name" 
+                    v-model="players.one.name">
             </div>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Player two name" name="player-two-name" v-model="players.two.name">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Done</button>
-                </div>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Player two name" 
+                    v-model="players.two.name">
+            </div>
+            <div slot="modal-footer" class="w-100">
+                <p class="float-left">Enter player names</p>
+                <b-btn size="sm" class="float-right" variant="primary" @click="modalShow=false">
+                Play
+                </b-btn>
             </div>
         </b-modal>
         </div>
