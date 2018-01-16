@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Memory</title>
+
+    <!-- external css -->
+    <link 
+        rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" 
+        integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" 
+        crossorigin="anonymous">
+    <link 
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+        rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" 
+        crossorigin="anonymous">
+    
+    <!-- external js -->   
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
+    <style>
+        .face {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .face h1 {
+            color: green;
+            background-color: grey;
+            font-size: 6rem;
+            padding-bottom: 20px;
+            margin-bottom: 0px;
+        }
+        .face .card-block {
+            margin-top: 0px;
+            padding-top: 10px;
+            background-color: purple;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <button class="btn btn-primary" v-on:click="createCards">Create Cards</button>
+            <hr>
+            <div class="row">
+                <div class="col-3" v-for="card in cards">
+                    <div class="card face">
+                        <h1><i class="fa fa-lg fa-smile-o"></i></h1>
+                        <div class="card-block">
+                            <h4 class="card-title">{{ card.name }}</h4>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                animals: ['dog', 'cat', 'mouse', 'hamster', 'goldfish', 'hedgehog', 'ferret', 'budgie'],
+                cards: []
+            },
+            methods: {
+                createCards: function() {
+                    var doubledAnimals = this.animals.concat(this.animals);
+                    var shuffledAnimals = _.shuffle(doubledAnimals);
+                    for (var i=0; i< doubledAnimals.length; i++){
+                        this.cards.push({
+                            name: shuffledAnimals.pop(),
+                        });
+                    }
+                }
+            }
+        })
+
+    </script>
+    
+</body>
+</html>
